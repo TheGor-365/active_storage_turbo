@@ -1,0 +1,22 @@
+<div id="<%= dom_id post %>" class="shadow rounded p-5">
+  <p class="text-center">
+    <strong>
+      <%= post.title %>
+    </strong>
+  </p>
+
+  <br><br>
+  <div class="border border-secondary rounded p-5">
+    <div class="border border-secondary rounded p-3 opacity-60">
+      <%= post.body %>
+    </div>
+    <%= turbo_frame_tag [dom_id(post), 'video'], data: { turbo_permanent: true } do %>
+      <div class="my-5">
+        <p class="text-muted">
+          <%= post.video.filename %>
+        </p>
+        <%= video_tag(url_for(post.video), width: 300, controls: true, class: 'shadow rounded') if post.video.attached? %>
+      </div>
+    <% end %>
+  </div>
+</div>
